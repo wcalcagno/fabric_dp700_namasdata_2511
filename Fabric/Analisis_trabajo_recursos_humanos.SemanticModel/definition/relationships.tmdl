@@ -1,0 +1,12 @@
+relationship 314972c1-1caf-754c-b362-cf5462cf0849
+	fromColumn: ft_costos_rrhh_dia_turno_depto_business_entity.departmentid
+	toColumn: dim_departamento.departmentid
+
+relationship 0af1c9ae-f25d-5840-00f5-add3b3737941
+	fromColumn: ft_costos_rrhh_dia_turno_depto_business_entity.businessentityid
+	toColumn: dim_trabajador.businessentityid
+
+relationship b8c92818-3f40-78c2-127d-ac3351ca3e0a
+	fromColumn: ft_costos_rrhh_dia_turno_depto_business_entity.shiftid
+	toColumn: dim_turno.shiftid
+
