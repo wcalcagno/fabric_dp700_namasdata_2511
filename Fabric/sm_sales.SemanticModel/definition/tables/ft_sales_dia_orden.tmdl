@@ -1,0 +1,40 @@
+table ft_sales_dia_orden
+	lineageTag: 9d425df9-096f-4682-b62e-2b2780df4fc3
+	sourceLineageTag: [dbo].[ft_sales_dia_orden]
+
+	column sale_date
+		dataType: dateTime
+		formatString: General Date
+		lineageTag: 8c2c83aa-6252-4e87-b090-967c2f1d3602
+		sourceLineageTag: sale_date
+		summarizeBy: none
+		sourceColumn: sale_date
+
+		annotation SummarizationSetBy = Automatic
+
+	column salesorderid
+		dataType: int64
+		formatString: 0
+		lineageTag: a87e3b91-5965-42f7-aadf-8a1428f461ad
+		sourceLineageTag: salesorderid
+		summarizeBy: sum
+		sourceColumn: salesorderid
+
+		annotation SummarizationSetBy = Automatic
+
+	column salesreasonid
+		dataType: int64
+		formatString: 0
+		lineageTag: cd392705-5d83-4b47-9265-6fae07a7f682
+		sourceLineageTag: salesreasonid
+		summarizeBy: none
+		sourceColumn: salesreasonid
+
+		annotation SummarizationSetBy = Automatic
+
+	partition ft_sales_dia_orden = entity
+		mode: directLake
+		source
+			entityName: ft_sales_dia_orden
+			expressionSource: 'DirectLake - Silver_Refined'
+

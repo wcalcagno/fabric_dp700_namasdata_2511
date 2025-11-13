@@ -1,0 +1,44 @@
+table dim_sales_reason
+	lineageTag: 780be58c-e38c-463b-8d94-c9b12d82b1e3
+	sourceLineageTag: [dbo].[dim_sales_reason]
+
+	measure CantidadVendida = DISTINCTCOUNT( ft_sales_dia_orden[salesorderid] )
+		formatString: 0
+		lineageTag: 06a53385-b31a-4078-a15c-bb9f68eeb3c1
+
+		changedProperty = Name
+
+	column salesreasonid
+		dataType: int64
+		formatString: 0
+		lineageTag: d9f38665-cdad-4092-8100-847da7304fd7
+		sourceLineageTag: salesreasonid
+		summarizeBy: none
+		sourceColumn: salesreasonid
+
+		annotation SummarizationSetBy = Automatic
+
+	column name
+		dataType: string
+		lineageTag: bf202a06-4a3a-4483-8948-fa56ec14e862
+		sourceLineageTag: name
+		summarizeBy: none
+		sourceColumn: name
+
+		annotation SummarizationSetBy = Automatic
+
+	column reasontype
+		dataType: string
+		lineageTag: ce1c60c8-c839-4276-8cd6-59ca2ebda5fc
+		sourceLineageTag: reasontype
+		summarizeBy: none
+		sourceColumn: reasontype
+
+		annotation SummarizationSetBy = Automatic
+
+	partition dim_sales_reason = entity
+		mode: directLake
+		source
+			entityName: dim_sales_reason
+			expressionSource: 'DirectLake - Silver_Refined'
+
