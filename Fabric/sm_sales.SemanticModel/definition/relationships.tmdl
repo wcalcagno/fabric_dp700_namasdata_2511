@@ -1,0 +1,4 @@
+relationship c3cb96f5-b4cd-618c-0454-9e8a650598cc
+	fromColumn: ft_sales_dia_orden.salesreasonid
+	toColumn: dim_sales_reason.salesreasonid
+

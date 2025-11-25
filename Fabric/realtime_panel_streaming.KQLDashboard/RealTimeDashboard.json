@@ -1,0 +1,121 @@
+{
+  "schema_version": 63,
+  "tiles": [
+    {
+      "id": "836bfe60-b5b2-4b1d-93d9-3c1700583dd8",
+      "queryRef": {
+        "kind": "query",
+        "queryId": "02cb7e4d-38ad-4889-80ec-329b4d1f1833"
+      },
+      "title": "hot_meteorologia Table Preview",
+      "visualType": "table",
+      "pageId": "86b4fedb-e286-46b6-a27d-74f635c90b1a",
+      "layout": {
+        "x": 16,
+        "y": 0,
+        "width": 6,
+        "height": 6
+      },
+      "visualOptions": {}
+    },
+    {
+      "id": "9a19d93e-cef4-42e3-94bb-b8020041b1be",
+      "title": "Nuevo icono",
+      "visualType": "line",
+      "pageId": "86b4fedb-e286-46b6-a27d-74f635c90b1a",
+      "layout": {
+        "x": 0,
+        "y": 0,
+        "width": 13,
+        "height": 10
+      },
+      "queryRef": {
+        "kind": "query",
+        "queryId": "4b16bd58-3bfd-40d6-8ff9-278dd0adb7a2"
+      },
+      "visualOptions": {
+        "multipleYAxes": {
+          "base": {
+            "id": "-1",
+            "label": "",
+            "columns": [],
+            "yAxisMaximumValue": null,
+            "yAxisMinimumValue": null,
+            "yAxisScale": "linear",
+            "horizontalLines": []
+          },
+          "additional": [],
+          "showMultiplePanels": false
+        },
+        "hideLegend": false,
+        "legendLocation": "bottom",
+        "xColumnTitle": "",
+        "xColumn": "hora",
+        "yColumns": null,
+        "seriesColumns": null,
+        "xAxisScale": "linear",
+        "verticalLine": "",
+        "crossFilter": [],
+        "crossFilterDisabled": false,
+        "drillthroughDisabled": false,
+        "drillthrough": []
+      }
+    }
+  ],
+  "baseQueries": [],
+  "parameters": [
+    {
+      "kind": "duration",
+      "id": "7bce1dc4-4790-418a-b588-0858ca17d769",
+      "displayName": "Intervalo de tiempo",
+      "description": "",
+      "beginVariableName": "_startTime",
+      "endVariableName": "_endTime",
+      "defaultValue": {
+        "kind": "dynamic",
+        "count": 1,
+        "unit": "hours"
+      },
+      "showOnPages": {
+        "kind": "all"
+      }
+    }
+  ],
+  "dataSources": [
+    {
+      "id": "232ae0a4-d703-4193-94d9-6bee93da6907",
+      "kind": "kusto-trident",
+      "clusterUri": "",
+      "database": "18ac5d2a-4ade-a136-41fe-e517ef0bb9f2",
+      "name": "eh_analitica_streaming",
+      "scopeId": "kusto-trident",
+      "workspace": "00000000-0000-0000-0000-000000000000"
+    }
+  ],
+  "pages": [
+    {
+      "name": "Página 1",
+      "id": "86b4fedb-e286-46b6-a27d-74f635c90b1a"
+    }
+  ],
+  "queries": [
+    {
+      "dataSource": {
+        "kind": "inline",
+        "dataSourceId": "232ae0a4-d703-4193-94d9-6bee93da6907"
+      },
+      "text": "['hot_meteorologia'] | take 10",
+      "id": "02cb7e4d-38ad-4889-80ec-329b4d1f1833",
+      "usedVariables": []
+    },
+    {
+      "dataSource": {
+        "kind": "inline",
+        "dataSourceId": "232ae0a4-d703-4193-94d9-6bee93da6907"
+      },
+      "text": "hot_meteorologia\n| extend dt = todatetime(dateTime)\n| extend tempArray = parse_json(temperature)\n| mv-expand tempArray\n| extend valor = todouble(tempArray.value)\n| extend loc = parse_json(location)\n| extend latitud = todouble(loc.latitude),\n     longitud = todouble(loc.longitude)\n| extend fecha = format_datetime(dt, \"yyyy-MM-dd\"),\n     hora = format_datetime(dt, \"HH:mm:ss\")\n| summarize\n  TempMax = max(valor),\n  TempMin = min(valor),\n  latitud = any(latitud),\n  longitud = any(longitud)\n by fecha, hora\n| order by fecha desc, hora desc\n",
+      "id": "4b16bd58-3bfd-40d6-8ff9-278dd0adb7a2",
+      "usedVariables": []
+    }
+  ]
+}

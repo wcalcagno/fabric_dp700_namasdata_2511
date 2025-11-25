@@ -1,0 +1,28 @@
+{
+  "queryset": {
+    "version": "1.0.0",
+    "dataSources": [
+      {
+        "id": "820d8d03-ea29-4b9e-8191-a7b0893c7a51",
+        "clusterUri": "https://trd-wm4t261wwvvh5m8bk9.z2.kusto.fabric.microsoft.com",
+        "type": "Fabric",
+        "databaseItemId": "ef0bb9f2-e517-41fe-a136-4ade18ac5d2a",
+        "databaseItemName": "eh_analitica_streaming"
+      }
+    ],
+    "tabs": [
+      {
+        "id": "6525c1ea-914c-43c2-9982-47dbdc965ce1",
+        "content": "//***********************************************************************************************************\n// Here are two articles to help you get started with KQL:\n// KQL reference guide - https://aka.ms/KQLguide\n// SQL - KQL conversions - https://aka.ms/sqlcheatsheet\n//***********************************************************************************************************\n\n// Use \"take\" to view a sample number of records in the table and check the data.\nhot_meteorologia\n| take 100\n",
+        "title": "Tab",
+        "dataSourceId": "820d8d03-ea29-4b9e-8191-a7b0893c7a51"
+      },
+      {
+        "id": "cf7733a7-3d87-489f-b3e0-8dba6d9a9131",
+        "content": "hot_meteorologia\n| extend dt = todatetime(dateTime)\n| extend tempArray = parse_json(temperature)\n| mv-expand tempArray\n| extend valor = todouble(tempArray.value)\n| extend loc = parse_json(location)\n| extend latitud  = todouble(loc.latitude),\n         longitud = todouble(loc.longitude)\n| extend fecha = format_datetime(dt, \"yyyy-MM-dd\"),\n         hora  = format_datetime(dt, \"HH:mm:ss\")\n| summarize\n    TempMax  = max(valor),\n    TempMin  = min(valor),\n    latitud  = any(latitud),\n    longitud = any(longitud)\n  by fecha, hora\n| order by fecha desc, hora desc\n",
+        "title": "",
+        "dataSourceId": "820d8d03-ea29-4b9e-8191-a7b0893c7a51"
+      }
+    ]
+  }
+}
