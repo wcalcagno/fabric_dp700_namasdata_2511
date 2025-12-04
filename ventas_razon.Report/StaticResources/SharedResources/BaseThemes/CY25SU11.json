@@ -301,11 +301,6 @@
     },
     "pivotTable": {
       "*": {
-        "columnHeaders": [
-          {
-            "columnAdjustment": "growToFit"
-          }
-        ],
         "rowHeaders": [
           {
             "showExpandCollapseButtons": true,
@@ -338,9 +333,11 @@
       "*": {
         "layout": [
           {
+            "maxTiles": 3
+          },
+          {
             "$id": "default",
             "cellPadding": 12,
-            "maxTiles": 3,
             "paddingIndividual": false,
             "paddingUniform": 12,
             "backgroundShow": true
