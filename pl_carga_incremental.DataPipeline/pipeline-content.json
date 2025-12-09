@@ -4,8 +4,8 @@
       {
         "type": "RefreshDataflow",
         "typeProperties": {
-          "dataflowId": "0f81165a-b49a-8775-4c83-e0344ea05073",
-          "workspaceId": "00000000-0000-0000-0000-000000000000",
+          "dataflowId": "4ea05073-e034-4c83-8775-b49a0f81165a",
+          "workspaceId": "0937df67-f304-4d29-bfd4-c5a2bc260840",
           "notifyOption": "NoNotification",
           "dataflowType": "DataflowFabric",
           "parameters": {
@@ -33,20 +33,20 @@
           "secureOutput": false
         },
         "name": "dataflow incremental pl",
-        "dependsOn": [
-          {
-            "activity": "marca agua destino",
-            "dependencyConditions": [
-              "Succeeded"
-            ]
-          }
-        ]
+        "state": "Inactive",
+        "onInactiveMarkAs": "Succeeded",
+        "dependsOn": []
       },
       {
-        "type": "TridentNotebook",
+        "type": "AzureFunctionActivity",
         "typeProperties": {
-          "notebookId": "81bd840c-fe0b-4b27-b1dd-1a0ca0067f43",
-          "workspaceId": "0937df67-f304-4d29-bfd4-c5a2bc260840"
+          "functionName": "query_data_from_tables",
+          "functionSetId": "ed736930-38e4-9857-443b-ad87bd09bdb7",
+          "workspaceId": "00000000-0000-0000-0000-000000000000",
+          "parameters": {}
+        },
+        "externalReferences": {
+          "connection": "bdae53d1-bee1-41ad-a6db-2a0ee7846be2"
         },
         "policy": {
           "timeout": "0.12:00:00",
@@ -55,11 +55,42 @@
           "secureInput": false,
           "secureOutput": false
         },
-        "name": "marca agua destino",
-        "state": "Inactive",
-        "onInactiveMarkAs": "Succeeded",
+        "name": "Functions1",
         "dependsOn": []
+      },
+      {
+        "type": "SetVariable",
+        "typeProperties": {
+          "variableName": "fecha_datos",
+          "value": {
+            "value": "@activity('Functions1').output\r\n",
+            "type": "Expression"
+          }
+        },
+        "policy": {
+          "secureInput": false,
+          "secureOutput": false
+        },
+        "name": "Set variable1",
+        "dependsOn": [
+          {
+            "activity": "Functions1",
+            "dependencyConditions": [
+              "Succeeded"
+            ]
+          }
+        ]
       }
-    ]
+    ],
+    "parameters": {
+      "funcion_out": {
+        "type": "string"
+      }
+    },
+    "variables": {
+      "fecha_datos": {
+        "type": "String"
+      }
+    }
   }
 }

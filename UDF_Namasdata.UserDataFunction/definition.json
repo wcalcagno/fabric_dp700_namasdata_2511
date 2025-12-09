@@ -1,0 +1,38 @@
+{
+  "$schema": "https://developer.microsoft.com/json-schemas/fabric/item/userDataFunction/definition/1.1.0/schema.json",
+  "runtime": "PYTHON",
+  "connectedDataSources": [
+    {
+      "alias": "BronzeLanding",
+      "artifactId": "be52b0d4-361a-97e0-4358-068218486496",
+      "artifactType": "Lakehouse",
+      "workspaceId": "00000000-0000-0000-0000-000000000000"
+    }
+  ],
+  "functions": [
+    {
+      "name": "get_udf_oai_spec_json",
+      "isPublicEndpointEnabled": true
+    },
+    {
+      "name": "query_data_from_tables",
+      "description": "",
+      "isPublicEndpointEnabled": true
+    }
+  ],
+  "libraries": {
+    "public": [
+      {
+        "name": "fabric-user-data-functions",
+        "type": "PYPI",
+        "version": "1.0"
+      },
+      {
+        "name": "pandas",
+        "type": "PYPI",
+        "version": "2.3.3"
+      }
+    ],
+    "private": []
+  }
+}
