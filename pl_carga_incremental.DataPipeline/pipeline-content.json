@@ -11,14 +11,14 @@
           "parameters": {
             "RangeStart": {
               "value": {
-                "value": "@formatDateTime(\n    activity('marca agua destino').output,\n    'dd-MM-yyyy HH:mm:ss'\n    )",
+                "value": "@formatDateTime(\n    '2020-12-31T00:00:00',\n    'dd-MM-yyyy HH:mm:ss'\n    )",
                 "type": "Expression"
               },
               "type": "DateTime"
             },
             "RangeEnd": {
               "value": {
-                "value": "@formatDateTime(\n    addDays(activity('marca agua destino').output, 7),\n    'dd-MM-yyyy HH:mm:ss'\n)",
+                "value": "@formatDateTime(\n    addDays('2020-12-31T00:00:00',7 ),\n    'dd-MM-yyyy HH:mm:ss'\n)",
                 "type": "Expression"
               },
               "type": "DateTime"
@@ -45,8 +45,8 @@
       {
         "type": "TridentNotebook",
         "typeProperties": {
-          "notebookId": "a0067f43-1a0c-b1dd-4b27-fe0b81bd840c",
-          "workspaceId": "00000000-0000-0000-0000-000000000000"
+          "notebookId": "81bd840c-fe0b-4b27-b1dd-1a0ca0067f43",
+          "workspaceId": "0937df67-f304-4d29-bfd4-c5a2bc260840"
         },
         "policy": {
           "timeout": "0.12:00:00",
@@ -56,6 +56,8 @@
           "secureOutput": false
         },
         "name": "marca agua destino",
+        "state": "Inactive",
+        "onInactiveMarkAs": "Succeeded",
         "dependsOn": []
       }
     ]

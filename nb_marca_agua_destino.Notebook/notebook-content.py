@@ -29,12 +29,23 @@
 
 # CELL ********************
 
-# MAGIC %%sql
-# MAGIC select max(time) from Silver_Refined.mciencia_incremental_pipeline
+df = spark.sql("select max(time) as fecha from Silver_Refined.mciencia_incremental_pipeline")
+display(df)
 
 # METADATA ********************
 
 # META {
-# META   "language": "sparksql",
+# META   "language": "python",
+# META   "language_group": "synapse_pyspark"
+# META }
+
+# CELL ********************
+
+df.write.mode("overwrite").option("mergeSchema","true").saveAsTable("Bronze_Landing.marca_de_agua")
+
+# METADATA ********************
+
+# META {
+# META   "language": "python",
 # META   "language_group": "synapse_pyspark"
 # META }

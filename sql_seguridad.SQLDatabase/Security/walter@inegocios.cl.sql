@@ -1,0 +1,6 @@
+CREATE USER [walter@inegocios.cl]
+    WITH SID = 0x923705715929BF4D8DCF107246AD7BA5, TYPE = E;
+
+
+GO
+
