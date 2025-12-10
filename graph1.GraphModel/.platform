@@ -1,11 +1,11 @@
 {
   "$schema": "https://developer.microsoft.com/json-schemas/fabric/gitIntegration/platformProperties/2.0.0/schema.json",
   "metadata": {
-    "type": "Dataflow",
-    "displayName": "df_incremental"
+    "type": "GraphModel",
+    "displayName": "graph1"
   },
   "config": {
     "version": "2.0",
-    "logicalId": "b4eda160-f532-8628-4547-c736e23880a3"
+    "logicalId": "be8bfc5e-9738-99b5-42db-1dfe2bc4c218"
   }
 }
